@@ -9,11 +9,12 @@ use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
     use AuthorizesRequests;
-    
+
     public function store(UserCreateRequest $request)
     {
         try {
@@ -37,7 +38,7 @@ class UserController extends Controller
                 'data' => $user,
             ], 201);
         } catch (\Throwable $e) {
-            \Log::error('User creation failed: ' . $e->getMessage());
+            Log::error('User creation failed: ' . $e->getMessage());
             return response()->json([
                 'status' => 0,
                 'message' => 'Creating user failed. Please try again.',
@@ -45,11 +46,12 @@ class UserController extends Controller
         }
     }
 
-    public function update(UserUpdateRequest $request, User $user){
+    public function update(UserUpdateRequest $request, User $user)
+    {
         try {
             $this->authorize('update', $user);
         } catch (\Throwable $e) {
-            \Log::error('An error occured: ' . $e->getMessage());
+            Log::error('An error occured: ' . $e->getMessage());
             return response()->json([
                 'status' => 0,
                 'message' => 'Update user failed, please try again.'

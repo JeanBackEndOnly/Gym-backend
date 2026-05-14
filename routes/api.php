@@ -19,7 +19,7 @@ Route::middleware(['auth:sanctum', 'throttle:60,1'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::middleware('admin')
-        ->group(function (){
-            Route::apiResource('users', UserController::Class);
+        ->group(function () {
+            Route::apiResource('users', UserController::class);
         });
 });
