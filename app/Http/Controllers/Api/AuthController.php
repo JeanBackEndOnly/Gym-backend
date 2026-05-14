@@ -13,7 +13,8 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function register(RegisterRequest $request){
+    public function register(RegisterRequest $request)
+    {
         try {
             $validated = $request->validated();
             $validated["password"] = Hash::make($validated["password"]);

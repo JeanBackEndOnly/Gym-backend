@@ -20,8 +20,7 @@ Route::middleware(['auth:sanctum', 'throttle:60,1'])->group(function () {
     Route::post('/change-password', [AuthController::class, 'changePassword']);
 
     Route::middleware('admin')
-        ->group(function (){
-            // Resource Routes
+        ->group(function () {
             Route::apiResource('users', UserController::class);
         });
 });

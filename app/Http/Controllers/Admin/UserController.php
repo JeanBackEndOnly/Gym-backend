@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
     use AuthorizesRequests;
-    
+
     public function store(UserCreateRequest $request)
     {
         try {
@@ -39,7 +39,7 @@ class UserController extends Controller
                 'data' => $user,
             ], 201);
         } catch (\Throwable $e) {
-            \Log::error('User creation failed: ' . $e->getMessage());
+            Log::error('User creation failed: ' . $e->getMessage());
             return response()->json([
                 'status' => 0,
                 'message' => 'Creating user failed. Please try again.',
@@ -77,7 +77,7 @@ class UserController extends Controller
                 'data' => $user->fresh(),
             ], 201);
         } catch (\Throwable $e) {
-            \Log::error('Update user failed: ' . $e->getMessage());
+            Log::error('Update user failed: ' . $e->getMessage());
             return response()->json([
                 'status' => 0,
                 'message' => 'Update user failed. Please try again.',
